@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { FormikErrors, FormikState, FormikTouched } from 'formik';
+import * as thousands from 'thousands';
 
 import { FormGroup, Label, Input } from 'reactstrap';
 
@@ -127,8 +128,8 @@ function Steps({ step, form }: Props) {
 						<p className="h5">Navn</p>
 						<Input
 							type="text"
-							name="name"
-							id="name"
+							name="full_name"
+							id="full_name"
 							onChange={e => form.setFieldValue('name', e.target.value)}
 							value={form.values.name}
 						/>
@@ -179,15 +180,16 @@ function Steps({ step, form }: Props) {
       document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-m2"]')!.value = form.values.area;
 			document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-degrees"]')!.value = form.values.degrees === 'above' ? 'Over 30 grader' : 'Under 30 grader';
 
-      document.querySelector<HTMLFormElement>('.wpcf7 .wpcf7-form')!.submit();
+      // document.querySelector<HTMLFormElement>('.wpcf7 .wpcf7-form')!.submit();
 		}, [form.values]);
 		
 		const price = Number(form.values.area) * (form.values.degrees === 'above' ? 140 :  80) * 1.25;
 
 		return (
 			<>
-				<h2 className="text-center">Din pris er {price} kr.</h2>
-				<h1 className="text-center">Tak, du vil blive kontaktet snarest</h1>
+				<h2 className="text-center">Din pris er {thousands(price, '.')} kr.</h2>
+				<p className="description text-center mt-n1">Prisen er vejledende og inkl. moms</p>
+				<h1 className="text-center mt-3">Tak, du vil blive kontaktet snarest</h1>
 			</>
 		)
 	}
