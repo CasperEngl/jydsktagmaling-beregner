@@ -61,12 +61,12 @@ function App() {
 				<Row className="mt-5 justify-content-center">
 					<Col xs="auto">
 						<ControlButton direction="backwards" hideOn={1}>
-							Forrige
+							&#171; Forrige
 						</ControlButton>
 					</Col>
 					<Col xs="auto">
 						<ControlButton direction="forwards" hideOn={3}>
-							Næste
+							Næste &#187;
 						</ControlButton>
 					</Col>
 				</Row>
