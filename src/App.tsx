@@ -73,7 +73,7 @@ function App() {
 			<Container>
 				<Progress />
 				<Steps form={form} />
-				<Row className="justify-content-center">
+				<Row>
 					<Column>
 						<ControlButton direction="backwards" hideOn={1}>
 							&#171; Forrige
