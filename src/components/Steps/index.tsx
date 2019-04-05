@@ -112,8 +112,8 @@ function Steps({ step, form }: Props) {
 			document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-area"]')!.value = form.values.area;
 		}
 
-		if (step === 3 && isEmpty(form.errors) && form.dirty && document.querySelector<HTMLFormElement>('.wpcf7 .wpcf7-submit')) {
-			document.querySelector<HTMLFormElement>('.wpcf7 .wpcf7-submit')!.click();
+		if (step === 3 && isEmpty(form.errors) && form.dirty && document.querySelector<HTMLButtonElement>('.wpcf7 .wpcf7-submit')) {
+			document.querySelector<HTMLButtonElement>('.wpcf7 .wpcf7-submit')!.click();
 		}
 	}, [form.values, step]);
 
