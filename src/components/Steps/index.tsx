@@ -74,40 +74,14 @@ function Steps({ step, form }: Props) {
 	if (step === 1) {
 		return (
 			<>
-				<p className="description mb-1">Hvis dit tags hældning er præcis 30 grader, så vælg under 30 grader</p>
-				<FormGroup check>
-					<Label check>
-						<Input 
-							type="radio"
-							name="degrees"
-							onChange={() => form.setFieldValue('degrees', 'below')}
-							checked={form.values.degrees === 'below'}
-						/>{' '}
-						Under 30 grader
-					</Label>
-				</FormGroup>
-				<FormGroup check>
-					<Label check>
-						<Input 
-							type="radio"
-							name="degrees"
-							onChange={() => form.setFieldValue('degrees', 'above')}
-							checked={form.values.degrees === 'above'}
-						/>{' '}
-						Over 30 grader
-					</Label>
-				</FormGroup>
-        <p className="text-danger font-italic">
-          {form.errors && form.errors.degrees ? form.errors.degrees : null}
-        </p>
-				<p className="h5 mt-3">Tag areal</p>
+				<p className="h5 mt-3">Flise areal</p>
 				<FormGroup>
 					<Label>
-						<p className="description">Totalt areal af dit tag, ikke grundplan</p>
+						<p className="description mb-1">Arealets grundplan i kvadratmeter</p>
 						<Input
 							type="number"
-							name="m2"
-							id="m2"
+							name="area"
+							id="area"
 							onChange={e => form.setFieldValue('area', e.target.value)}
 							value={form.values.area}
 						/>
@@ -177,13 +151,24 @@ function Steps({ step, form }: Props) {
       document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-name"]')!.value = form.values.name;
       document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-email"]')!.value = form.values.email;
       document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-phone"]')!.value = form.values.phone;
-      document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-m2"]')!.value = form.values.area;
-			document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-degrees"]')!.value = form.values.degrees === 'above' ? 'Over 30 grader' : 'Under 30 grader';
+      document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-area"]')!.value = form.values.area;
 
       // document.querySelector<HTMLFormElement>('.wpcf7 .wpcf7-form')!.submit();
 		}, [form.values]);
+
+		const area = Number(form.values.area);
+
+		let price = 0;
+
+		if (area < 30) {
+			price = 2500;
+		} else if (area < 50) {
+			price = 3700;
+		} else {
+			price = 3700 + (area - 50) * 40;
+		}
 		
-		const price = Number(form.values.area) * (form.values.degrees === 'above' ? 140 :  80) * 1.25;
+		price = price * 1;
 
 		return (
 			<>
