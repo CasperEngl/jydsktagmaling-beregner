@@ -122,8 +122,8 @@ function Steps({ step, form }: Props) {
 				form.values.degrees === 'above' ? 'Over 30 grader' : 'Under 30 grader';
 		}
 
-		if (step === 3 && isEmpty(form.errors) && form.dirty && document.querySelector<HTMLFormElement>('.wpcf7 .wpcf7-form')) {
-			document.querySelector<HTMLFormElement>('.wpcf7 .wpcf7-form')!.submit();
+		if (step === 3 && isEmpty(form.errors) && form.dirty && document.querySelector<HTMLButtonElement>('.wpcf7 .wpcf7-submit')) {
+			document.querySelector<HTMLButtonElement>('.wpcf7 .wpcf7-submit')!.click();
 		}
 	}, [form.values, step]);
 
@@ -158,7 +158,7 @@ function Steps({ step, form }: Props) {
 				<p className="text-danger font-italic">
 					{form.errors && form.errors.degrees ? form.errors.degrees : null}
 				</p>
-				<Title>Flise areal</Title>
+				<Title>Tag areal</Title>
 				<p className="description">Totalt areal af dit tag, ikke grundplan</p>
 				<Input
 					type="number"
