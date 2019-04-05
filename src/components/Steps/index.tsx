@@ -191,8 +191,11 @@ function Steps({ step, form }: Props) {
 	}
 
 	if (step === 3 && isEmpty(form.errors) && form.dirty) {
+		const area = Number(form.values.area);
+		const tax = 1.25;
+
 		if (price === 0) {
-			setPrice(Number(form.values.area) * (form.values.degrees === 'above' ? 140 :  80) * 1.25);
+			setPrice(area * (form.values.degrees === 'above' ? 140 :  80) * tax);
 		}
 
 		return (
