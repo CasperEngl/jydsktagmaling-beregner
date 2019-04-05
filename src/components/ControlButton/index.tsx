@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Button } from 'reactstrap';
 import styled from 'styled-components';
 
 import { StepsState, setStep } from '../../ducks/steps';
@@ -18,8 +17,19 @@ interface State {
 	steps: StepsState;
 }
 
-const StyledButton = styled(Button)`
+const Button = styled.button`
+	padding: 0.5rem 1rem;
+	display: inline-block;
 	background: #444;
+	border-radius: 0;
+	font-size: 1.25rem;
+	font-weight: 400;
+	vertical-align: middle;
+	line-height: 1.5;
+	text-align: center;
+	color: white;
+	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+	cursor: pointer;
 
 	&:hover {
 		background: #555;
@@ -28,7 +38,11 @@ const StyledButton = styled(Button)`
 	&:active {
 		background: #555;
 	}
-`
+
+	&:focus {
+		outline: none;
+	}
+`;
 
 function ControlButton({ hideOn, direction, step, setStep, children }: Props) {
 	if (step === hideOn) {
@@ -36,12 +50,11 @@ function ControlButton({ hideOn, direction, step, setStep, children }: Props) {
 	}
 
 	return (
-		<StyledButton
-			size="lg"
+		<Button
 			onClick={() => setStep(direction === 'backwards' ? step - 1 : step + 1)}
 		>
 			{children}
-		</StyledButton>
+		</Button>
 	);
 }
 
