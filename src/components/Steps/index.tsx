@@ -71,6 +71,23 @@ interface State {
 }
 
 function Steps({ step, form }: Props) {
+	const [price, setPrice] = React.useState(0);
+
+	React.useEffect(() => {
+		document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-name"]')!.value = form.values.name;
+		document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-email"]')!.value = form.values.email;
+		document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-phone"]')!.value = form.values.phone;
+		document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-area"]')!.value = form.values.area;
+
+		// if (step === 3 && isEmpty(form.errors) && form.dirty) {
+		// 	document.querySelector<HTMLFormElement>('.wpcf7 .wpcf7-form')!.submit();
+		// }
+	}, [form.values, price]);
+
+	React.useEffect(() => {
+		setPrice(0);
+	}, [step]);
+
 	if (step === 1) {
 		return (
 			<>
@@ -147,28 +164,18 @@ function Steps({ step, form }: Props) {
 	}
 
 	if (step === 3 && isEmpty(form.errors) && form.dirty) {
-    React.useEffect(() => {
-      document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-name"]')!.value = form.values.name;
-      document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-email"]')!.value = form.values.email;
-      document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-phone"]')!.value = form.values.phone;
-      document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-area"]')!.value = form.values.area;
-
-      // document.querySelector<HTMLFormElement>('.wpcf7 .wpcf7-form')!.submit();
-		}, [form.values]);
-
 		const area = Number(form.values.area);
+		const tax = 1.25;
 
-		let price = 0;
-
-		if (area < 30) {
-			price = 2500;
-		} else if (area < 50) {
-			price = 3700;
-		} else {
-			price = 3700 + (area - 50) * 40;
+		if (price === 0) {
+			if (area < 30) {
+				setPrice(2500 * tax);
+			} else if (area < 50) {
+				setPrice(3700 * tax);
+			} else {
+				setPrice((3700 + (area - 50) * 40) * tax);
+			}
 		}
-		
-		price = price * 1.25;
 
 		return (
 			<>
