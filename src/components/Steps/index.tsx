@@ -82,7 +82,7 @@ function Steps({ step, form }: Props) {
 		// if (step === 3 && isEmpty(form.errors) && form.dirty) {
 		// 	document.querySelector<HTMLFormElement>('.wpcf7 .wpcf7-form')!.submit();
 		// }
-	}, [form.values, price]);
+	}, [form.values, step]);
 
 	React.useEffect(() => {
 		setPrice(0);
