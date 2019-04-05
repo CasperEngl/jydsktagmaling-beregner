@@ -35,9 +35,6 @@ function App() {
 			area: '',
     },
     validationSchema: Yup.object().shape({
-			degrees: Yup.mixed()
-				.oneOf(['above', 'below'], 'Husk at vælge enten over eller under')
-				.required('Påkrævet'),
 			area: Yup.number()
 				.required('Påkrævet'),
       name: Yup.string()
@@ -75,8 +72,7 @@ function App() {
 						<input type="text" name="book-name" />
 						<input type="text" name="book-email" />
 						<input type="text" name="book-phone" />
-						<input type="text" name="book-m2" />
-						<input type="text" name="book-degrees"/>
+						<input type="text" name="book-area" />
 					</form>
 				</div>
 			</Container>
