@@ -2,8 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { FormikErrors, FormikState, FormikTouched } from 'formik';
 import * as thousands from 'thousands';
-
-import { FormGroup, Label, Input } from 'reactstrap';
+import styled from 'styled-components';
 
 import { StepsState } from '../../ducks/steps';
 import { isEmpty } from '../../App';
@@ -70,16 +69,50 @@ interface State {
 	steps: StepsState;
 }
 
+const Title = styled.h5`
+	margin: 1rem 0 .25rem;
+	font-size: 1.25rem;
+	font-weight: 400;
+`;
+
+const Input = styled.input`
+	box-sizing: border-box;
+	height: auto;
+	width: 100%;
+	padding: 6px 12px;
+	display: block;
+	background-color: #f8f9fa;
+	border: 2px solid #e4e4e4;
+	border-radius: 0;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #495057;
+	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+	&:focus {
+		outline: none;
+	}
+`;
+
 function Steps({ step, form }: Props) {
 	const [price, setPrice] = React.useState(0);
 
 	React.useEffect(() => {
-		document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-name"]')!.value = form.values.name;
-		document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-email"]')!.value = form.values.email;
-		document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-phone"]')!.value = form.values.phone;
-		document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-area"]')!.value = form.values.area;
+		if (document.querySelector('.wpcf7 input[name="book-name"]')) {
+			document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-name"]')!.value = form.values.name;
+		}
+		if (document.querySelector('.wpcf7 input[name="book-email"]')) {
+			document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-email"]')!.value = form.values.email;
+		}
+		if (document.querySelector('.wpcf7 input[name="book-phone"]')) {
+			document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-phone"]')!.value = form.values.phone;
+		}
+		if (document.querySelector('.wpcf7 input[name="book-area"]')) {
+			document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-area"]')!.value = form.values.area;
+		}
 
-		// if (step === 3 && isEmpty(form.errors) && form.dirty) {
+		// if (step === 3 && isEmpty(form.errors) && form.dirty && document.querySelector<HTMLFormElement>('.wpcf7 .wpcf7-form')) {
 		// 	document.querySelector<HTMLFormElement>('.wpcf7 .wpcf7-form')!.submit();
 		// }
 	}, [form.values, step]);
@@ -91,22 +124,16 @@ function Steps({ step, form }: Props) {
 	if (step === 1) {
 		return (
 			<>
-				<p className="h5 mt-3">Flise areal</p>
-				<FormGroup>
-					<Label>
-						<p className="description mb-1">Arealets grundplan i kvadratmeter</p>
-						<Input
-							type="number"
-							name="area"
-							id="area"
-							onChange={e => form.setFieldValue('area', e.target.value)}
-							value={form.values.area}
-						/>
-            <p className="text-danger font-italic">
-							{form.errors && form.errors.area ? form.errors.area : null}
-						</p>
-					</Label>
-				</FormGroup>
+				<Title>Flise areal</Title>
+				<p className="description mb-1">Arealets grundplan i kvadratmeter</p>
+				<Input
+					type="number"
+					name="area"
+					id="area"
+					onChange={e => form.setFieldValue('area', e.target.value)}
+					value={form.values.area}
+				/>
+				<p className="error">{form.errors && form.errors.area ? form.errors.area : null}</p>
 			</>
 		);
 	}
@@ -114,51 +141,33 @@ function Steps({ step, form }: Props) {
 	if (step === 2) {
 		return (
 			<>
-				<FormGroup>
-					<Label>
-						<p className="h5">Navn</p>
-						<Input
-							type="text"
-							name="full_name"
-							id="full_name"
-							onChange={e => form.setFieldValue('name', e.target.value)}
-							value={form.values.name}
-						/>
-						<p className="text-danger font-italic">
-							{form.errors && form.errors.name ? form.errors.name : null}
-						</p>
-					</Label>
-				</FormGroup>
-				<FormGroup>
-					<Label>
-						<p className="h5">Email</p>
-						<Input
-							type="email"
-							name="email"
-							id="email"
-							onChange={e => form.setFieldValue('email', e.target.value)}
-							value={form.values.email}
-						/>
-						<p className="text-danger font-italic">
-							{form.errors && form.errors.email ? form.errors.email : null}
-						</p>
-					</Label>
-				</FormGroup>
-				<FormGroup>
-					<Label>
-						<p className="h5">Telefon</p>
-						<Input
-							type="tel"
-							name="phone"
-							id="phone"
-							onChange={e => form.setFieldValue('phone', e.target.value)}
-							value={form.values.phone}
-						/>
-						<p className="text-danger font-italic">
-							{form.errors && form.errors.phone ? form.errors.phone : null}
-						</p>
-					</Label>
-				</FormGroup>
+				<Title>Navn</Title>
+				<Input
+					type="text"
+					name="full_name"
+					id="full_name"
+					onChange={e => form.setFieldValue('name', e.target.value)}
+					value={form.values.name}
+				/>
+				<p className="error">{form.errors && form.errors.name ? form.errors.name : null}</p>
+				<Title>Email</Title>
+				<Input
+					type="email"
+					name="email"
+					id="email"
+					onChange={e => form.setFieldValue('email', e.target.value)}
+					value={form.values.email}
+				/>
+				<p className="error">{form.errors && form.errors.email ? form.errors.email : null}</p>
+				<Title>Telefon</Title>
+				<Input
+					type="tel"
+					name="phone"
+					id="phone"
+					onChange={e => form.setFieldValue('phone', e.target.value)}
+					value={form.values.phone}
+				/>
+				<p className="error">{form.errors && form.errors.phone ? form.errors.phone : null}</p>
 			</>
 		);
 	}
@@ -183,7 +192,7 @@ function Steps({ step, form }: Props) {
 				<p className="description text-center mt-n1">Prisen er vejledende og inkl. moms</p>
 				<h1 className="text-center mt-3">Tak, du vil blive kontaktet snarest</h1>
 			</>
-		)
+		);
 	}
 
 	return <h1 className="text-center">Husk at udfylde alle felter</h1>;

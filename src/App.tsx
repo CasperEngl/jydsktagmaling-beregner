@@ -5,8 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-
-import { Container, Row, Col } from 'reactstrap';
+import styled from 'styled-components';
 
 import Progress from './components/Progress';
 import ControlButton from './components/ControlButton';
@@ -24,6 +23,25 @@ export function isEmpty(obj: any) {
 	}
 	return true;
 }
+
+const Container = styled.div`
+	box-sizing: border-box;
+	margin: 0 auto;
+	padding: 1.5rem;
+	width: 100%;
+	max-width: 1200px;
+	background: #F8F9FA;
+`;
+
+const Row = styled.div`
+	margin-top: 3rem;
+	display: flex;
+	justify-content: center;
+`;
+
+const Column = styled.div`
+	width: auto;
+`;
 
 function App() {
 	const form = useFormik({
@@ -52,29 +70,21 @@ function App() {
 	
 	return (
 		<Provider store={store}>
-			<Container className="bg-light p-5">
+			<Container>
 				<Progress />
 				<Steps form={form} />
-				<Row className="mt-5 justify-content-center">
-					<Col xs="auto">
+				<Row className="justify-content-center">
+					<Column>
 						<ControlButton direction="backwards" hideOn={1}>
 							&#171; Forrige
 						</ControlButton>
-					</Col>
-					<Col xs="auto">
+					</Column>
+					<Column>
 						<ControlButton direction="forwards" hideOn={3}>
 							Næste &#187;
 						</ControlButton>
-					</Col>
+					</Column>
 				</Row>
-				<div className="wpcf7 mt-5">
-					<form method="GET" className="wpcf7-form">
-						<input type="text" name="book-name" />
-						<input type="text" name="book-email" />
-						<input type="text" name="book-phone" />
-						<input type="text" name="book-area" />
-					</form>
-				</div>
 			</Container>
 		</Provider>
 	);
