@@ -75,7 +75,7 @@ function App() {
 						<input type="text" name="book-name" />
 						<input type="text" name="book-email" />
 						<input type="text" name="book-phone" />
-						<input type="text" name="book-m2" />
+						<input type="text" name="book-area" />
 						<input type="text" name="book-degrees"/>
 					</form>
 				</div>
