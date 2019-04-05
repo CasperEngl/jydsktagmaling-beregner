@@ -73,6 +73,22 @@ interface State {
 function Steps({ step, form }: Props) {
 	const [price, setPrice] = React.useState(0);
 
+	React.useEffect(() => {
+		document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-name"]')!.value = form.values.name;
+		document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-email"]')!.value = form.values.email;
+		document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-phone"]')!.value = form.values.phone;
+		document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-area"]')!.value = form.values.area;
+		document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-degrees"]')!.value = form.values.degrees === 'above' ? 'Over 30 grader' : 'Under 30 grader';
+
+		// if (step === 3 && isEmpty(form.errors) && form.dirty) {
+		// 	document.querySelector<HTMLFormElement>('.wpcf7 .wpcf7-form')!.submit();
+		// }
+	}, [form.values, step]);
+
+	React.useEffect(() => {
+		setPrice(0);
+	}, [step]);
+
 	if (step === 1) {
 		return (
 			<>
@@ -175,17 +191,9 @@ function Steps({ step, form }: Props) {
 	}
 
 	if (step === 3 && isEmpty(form.errors) && form.dirty) {
-    React.useEffect(() => {
-      document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-name"]')!.value = form.values.name;
-      document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-email"]')!.value = form.values.email;
-      document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-phone"]')!.value = form.values.phone;
-      document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-area"]')!.value = form.values.area;
-			document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-degrees"]')!.value = form.values.degrees === 'above' ? 'Over 30 grader' : 'Under 30 grader';
-
-      // document.querySelector<HTMLFormElement>('.wpcf7 .wpcf7-form')!.submit();
-		}, [form.values]);
-		
-		setPrice(Number(form.values.area) * (form.values.degrees === 'above' ? 140 :  80) * 1.25);
+		if (price === 0) {
+			setPrice(Number(form.values.area) * (form.values.degrees === 'above' ? 140 :  80) * 1.25);
+		}
 
 		return (
 			<>
