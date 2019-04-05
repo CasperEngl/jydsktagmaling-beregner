@@ -168,7 +168,7 @@ function Steps({ step, form }: Props) {
 			price = 3700 + (area - 50) * 40;
 		}
 		
-		price = price * 1;
+		price = price * 1.25;
 
 		return (
 			<>
