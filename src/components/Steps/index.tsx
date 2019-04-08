@@ -131,7 +131,7 @@ function Steps({ step, form }: Props) {
 			document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-type"]')!.value = 'Tagmaling';
 		}
 		if (document.querySelector('.wpcf7 input[name="book-price"]')) {
-			document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-price"]')!.value = String(price);
+			document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-price"]')!.value = thousands(price, '.');
 		}
 
 		if (step === 3 && isEmpty(form.errors) && form.dirty && document.querySelector<HTMLButtonElement>('.wpcf7 .wpcf7-submit')) {
