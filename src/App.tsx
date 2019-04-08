@@ -49,6 +49,7 @@ function App() {
       name: '',
       email: '',
 			phone: '',
+			address: '',
 			degrees: null,
 			area: '',
     },
