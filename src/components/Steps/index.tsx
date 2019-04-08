@@ -122,7 +122,7 @@ function Steps({ step, form }: Props) {
 				form.values.degrees === 'above' ? 'Over 30 grader' : 'Under 30 grader';
 		}
 		if (document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-type"]')) {
-			document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-type"]')!.value = 'Fliserens';
+			document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-type"]')!.value = 'Tagmaling';
 		}
 		if (document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-price"]')) {
 			document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-price"]')!.value = String(price);
@@ -208,6 +208,24 @@ function Steps({ step, form }: Props) {
 					value={form.values.phone}
 				/>
 				<p className="error">{form.errors && form.errors.phone ? form.errors.phone : null}</p>
+				<Title>Adresse</Title>
+				<Input
+					type="text"
+					name="address"
+					id="address"
+					onChange={e => form.setFieldValue('address', e.target.value)}
+					value={form.values.address}
+				/>
+				<p className="error">{form.errors && form.errors.address ? form.errors.address : null}</p>
+				<Title>Postnummer</Title>
+				<Input
+					type="tel"
+					name="zip_code"
+					id="zip_code"
+					onChange={e => form.setFieldValue('zipCode', e.target.value)}
+					value={form.values.zipCode}
+				/>
+				<p className="error">{form.errors && form.errors.zipCode ? form.errors.zipCode : null}</p>
 			</>
 		);
 	}
