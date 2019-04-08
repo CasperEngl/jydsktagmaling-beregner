@@ -121,10 +121,16 @@ function Steps({ step, form }: Props) {
 			document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-degrees"]')!.value =
 				form.values.degrees === 'above' ? 'Over 30 grader' : 'Under 30 grader';
 		}
-		if (document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-type"]')) {
+		if (document.querySelector('.wpcf7 input[name="book-address"]')) {
+			document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-address"]')!.value = form.values.address;
+		}
+		if (document.querySelector('.wpcf7 input[name="book-zip_code"]')) {
+			document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-zip_code"]')!.value = form.values.zipCode;
+		}
+		if (document.querySelector('.wpcf7 input[name="book-type"]')) {
 			document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-type"]')!.value = 'Tagmaling';
 		}
-		if (document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-price"]')) {
+		if (document.querySelector('.wpcf7 input[name="book-price"]')) {
 			document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-price"]')!.value = String(price);
 		}
 
