@@ -64,6 +64,9 @@ function App() {
       phone: Yup.string()
         .min(8, 'Vi ønkser du udfylder 8 tal')
         .required('Påkrævet'),
+			address: Yup.string()
+        .min(2, 'For at oplyse din pris, skal vi bruge din adresse')
+        .required('Påkrævet'),
     }),
 		onSubmit: console.log,
 	});
