@@ -50,6 +50,7 @@ function App() {
       email: '',
 			phone: '',
 			address: '',
+			zipCode: '',
 			degrees: null,
 			area: '',
     },
@@ -68,6 +69,9 @@ function App() {
 			address: Yup.string()
         .min(2, 'For at oplyse din pris, skal vi bruge din adresse')
         .required('Påkrævet'),
+			zipCode: Yup.string()
+				.min(4, 'For at oplyse din pris, skal vi bruge dit postnummer')
+				.required('Påkrævet'),
     }),
 		onSubmit: console.log,
 	});
