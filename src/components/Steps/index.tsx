@@ -121,6 +121,12 @@ function Steps({ step, form }: Props) {
 			document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-degrees"]')!.value =
 				form.values.degrees === 'above' ? 'Over 30 grader' : 'Under 30 grader';
 		}
+		if (document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-type"]')) {
+			document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-type"]')!.value = 'Fliserens';
+		}
+		if (document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-price"]')) {
+			document.querySelector<HTMLInputElement>('.wpcf7 input[name="book-price"]')!.value = String(price);
+		}
 
 		if (step === 3 && isEmpty(form.errors) && form.dirty && document.querySelector<HTMLButtonElement>('.wpcf7 .wpcf7-submit')) {
 			document.querySelector<HTMLButtonElement>('.wpcf7 .wpcf7-submit')!.click();
